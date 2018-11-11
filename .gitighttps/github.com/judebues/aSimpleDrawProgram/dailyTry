@@ -1,0 +1,111 @@
+
+#include<graphics.h>
+void paintInIt();
+void getTheRecentInformation();
+void showFunction();
+void mean_function();
+void initlize_function();
+
+int main() {
+	initlize_function();
+	mean_function();
+	return 0;
+}
+void mean_function() {
+	initgraph(600, 800);
+	int n = 0;
+	for (;;) {//直到用户输入3/1的时候，函数返回
+		showFunction();
+		n = getInteger();//作为switch的判断依据
+		switch (n) {
+		case 1:
+			cleardevice();
+			showFunction();
+			break;
+		case 2:
+			paintInIt();//用来作图的函数
+			break;
+		case 3:
+			return;
+			break;
+		case 4:
+			getTheRecentInformation();
+			break;
+		default:
+			xyprintf(20, 100, "您的输入整体有误，请查证后重新输入");
+			cleardevice();
+			showFunction();
+			break;
+		}
+		n = getInteger();//防止无法看清图片；	
+	}
+	n = getInteger();
+	closegraph();
+}
+void paintInIt(){
+	int s=0, coordiateX=0, coordiateY=0,radius=0;
+	int left=0, right=0, top=0, bottom=0;
+	xyprintf(20, 100, "请输入您选择的形状");
+	xyprintf(20, 120 , "1：圆 \t\t2：长方形");
+	xyprintf(20, 140 , "3：正方形\t\t4：多边形");
+	s = getInteger();
+	switch (s) {
+	case 1:
+		xyprintf(20, 160, "请输入圆的圆心坐标及半径");
+		coordiateX = getInteger();
+		coordiateY = getInteger();
+		radius = getInteger();
+		circle(coordiateX, coordiateY, radius);
+		return;
+		break;
+	case 2:
+		xyprintf(20, 160, "请输入长方形的四个点的坐标");
+		left   = getInteger();
+		right  = getInteger();
+		top    = getInteger();
+		bottom = getInteger();
+		rectangle(left, right, top, bottom);
+		return;
+		break;
+	case 3:
+		xyprintf(20, 160, "请输入正方形的四个点的坐标");
+		left = getInteger();
+		right = getInteger();
+		top = getInteger();
+		bottom = getInteger();
+		rectangle(left, right, top, bottom);
+		return;
+		break;
+	default:
+		xyprintf(20, 160, "您的输入有误，请查证后重新输入");
+		return;
+		break;
+	}
+}
+void showFunction() {
+	outtextxy(20, 0, "欢迎来到随意画板");
+	xyprintf(20, 40, "请选择您所需要的操作");
+	xyprintf(20, 60, "1：清除屏幕  2：作画");
+	xyprintf(20, 80, "3：退出      4：浏览输入信息");
+}
+void getTheRecentInformation() {
+	//获得之前所存储的文件信息；
+}
+void initlize_function() {
+	initgraph(400, 500);//初始化界面，设定长宽
+	int choicefirst, choicesecond;
+	xyprintf(20, 20, "请问您是否读取之前存储的消息");
+	xyprintf(20, 40, "1:是         2:不是");
+	int a = 0, b = 0;
+
+	a = getInteger();
+	if (a == 1)
+		outtextxy(20, 60, "已读取");
+	else if (a == 2)
+		xyprintf(20, 60, "操作结束");
+	else
+		xyprintf(20, 60, "输入有误请重新输入");
+	b = getch();
+	closegraph();//关闭初始化的界面
+}
+
